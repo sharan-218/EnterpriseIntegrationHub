@@ -1,0 +1,85 @@
+# -------------------------------
+# Node / Package Management
+# -------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+yarn.lock
+
+# -------------------------------
+# Environment Files
+# -------------------------------
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Supabase environment
+.supabase/
+
+# -------------------------------
+# Logs / Runtime Files
+# -------------------------------
+logs/
+*.log
+*.out
+*.pid
+*.seed
+coverage/
+dist/
+build/
+tmp/
+temp/
+
+# -------------------------------
+# Database & Supabase
+# -------------------------------
+*.db
+*.sql
+*.dump
+*.tar
+supabase/.branches/
+supabase/.temp/
+supabase/functions/.env
+
+# -------------------------------
+# IDE / OS Specific
+# -------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# -------------------------------
+# Docker / Containers
+# -------------------------------
+docker-compose.override.yml
+.docker/
+.dockerignore
+
+# -------------------------------
+# Tests / Coverage
+# -------------------------------
+coverage/
+test-results/
+*.spec.ts
+*.spec.js
+
+# -------------------------------
+# Local development artifacts
+# -------------------------------
+.n8n/
+data/
+cache/
+.envrc
+*.local.json
+
+# -------------------------------
+# Build Artifacts
+# -------------------------------
+lib/
+out/
