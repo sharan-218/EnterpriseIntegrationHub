@@ -4,12 +4,14 @@ import cors from "cors";
 // import { verifyToken } from "@clerk/clerk-sdk-node";
 // import { createClient } from "@supabase/supabase-js";
 import integrationRoutes from "./api/integrations";
+import connectionRoutes from "./routes/connectionRoutes";
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 app.use("/api/integrations", integrationRoutes);
-
+app.use("/api/connections", connectionRoutes);
 const PORT = process.env.PORT || 8000;
 // const SUPABASE_URL = process.env.SUPABASE_URL!;
 // const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -40,6 +42,9 @@ const PORT = process.env.PORT || 8000;
 // --- Health check route ---
 
 // --- Start server ---
+app.get("/", (req, res) => {
+  res.send("Enterprise Integration Hub Backend is running!");
+});
 app.listen(PORT, () => {
   console.log(`Enterprise Integration Hub backend running on port ${PORT} 🚀`);
 });

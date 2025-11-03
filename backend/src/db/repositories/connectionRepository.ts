@@ -1,30 +1,23 @@
 import { supabaseAdmin as supabase } from "../../config/supabaseClient";
+
 export class ConnectionRepository {
-  private table = "connections";
-  async createConnection(data: {
-    integration_id: string;
-    organization_id: string;
-    access_token: string;
-    refresh_token?: string;
-    expires_at?: string;
-    status?: string;
-    metadata?: Record<string, any>;
-  }) {
-    const { data: result, error } = await supabase
-      .from(this.table)
-      .insert([data])
+  async createConnection(payload: any) {
+    const { data, error } = await supabase
+      .from("connections")
+      .insert(payload)
       .select()
       .single();
 
     if (error) throw new Error(error.message);
-    return result;
+    return data;
   }
+
   async getConnectionByIntegration(
     integration_id: string,
     organization_id: string
   ) {
     const { data, error } = await supabase
-      .from(this.table)
+      .from("connections")
       .select("*")
       .eq("integration_id", integration_id)
       .eq("organization_id", organization_id);
@@ -33,44 +26,20 @@ export class ConnectionRepository {
     return data;
   }
 
-  async getConnectionById(id: string) {
+  async getConnectionById(id: string, organization_id: string) {
     const { data, error } = await supabase
-      .from(this.table)
+      .from("connections")
       .select("*")
       .eq("id", id)
+      .eq("organization_id", organization_id)
       .single();
 
     if (error) throw new Error(error.message);
     return data;
   }
 
-  async updateConnection(id: string, updates: Partial<any>) {
-    const { data, error } = await supabase
-      .from(this.table)
-      .update(updates)
-      .eq("id", id)
-      .select()
-      .single();
-
-    if (error) throw new Error(error.message);
-    return data;
-  }
   async deleteConnection(id: string) {
-    const { error } = await supabase.from(this.table).delete().eq("id", id);
+    const { error } = await supabase.from("connections").delete().eq("id", id);
     if (error) throw new Error(error.message);
-    return true;
-  }
-  async deleteConnectionByIntegration(
-    integration_id: string,
-    organization_id: string
-  ) {
-    const { error } = await supabase
-      .from(this.table)
-      .delete()
-      .eq("integration_id", integration_id)
-      .eq("organization_id", organization_id);
-
-    if (error) throw new Error(error.message);
-    return true;
   }
 }

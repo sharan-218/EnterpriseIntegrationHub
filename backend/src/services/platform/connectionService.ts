@@ -43,6 +43,12 @@ export class ConnectionService {
       organizationId
     );
   }
+  async getConnectionById(id: string, organizationId: string) {
+    if (!id || !organizationId)
+      throw new Error("Connection ID and Organization ID are required.");
+
+    return await this.connectionRepo.getConnectionById(id, organizationId);
+  }
 
   async disconnectConnection(id: string) {
     if (!id) throw new Error("Connection ID required.");
