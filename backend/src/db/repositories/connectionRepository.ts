@@ -1,5 +1,4 @@
 import { supabaseAdmin as supabase } from "../../config/supabaseClient";
-
 export class ConnectionRepository {
   private table = "connections";
   async createConnection(data: {
@@ -58,6 +57,19 @@ export class ConnectionRepository {
   }
   async deleteConnection(id: string) {
     const { error } = await supabase.from(this.table).delete().eq("id", id);
+    if (error) throw new Error(error.message);
+    return true;
+  }
+  async deleteConnectionByIntegration(
+    integration_id: string,
+    organization_id: string
+  ) {
+    const { error } = await supabase
+      .from(this.table)
+      .delete()
+      .eq("integration_id", integration_id)
+      .eq("organization_id", organization_id);
+
     if (error) throw new Error(error.message);
     return true;
   }

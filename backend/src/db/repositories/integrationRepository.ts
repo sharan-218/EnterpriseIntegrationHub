@@ -52,6 +52,15 @@ export class IntegrationRepository {
     if (error) throw new Error(error.message);
     return data;
   }
+  async getIntegrationsByOrg(organization_id: string) {
+    const { data, error } = await supabase
+      .from(this.table)
+      .select("*")
+      .eq("organization_id", organization_id);
+
+    if (error) throw new Error(error.message);
+    return data;
+  }
 
   async deleteIntegration(id: string) {
     const { error } = await supabase.from(this.table).delete().eq("id", id);
