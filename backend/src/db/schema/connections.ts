@@ -7,12 +7,10 @@ export interface Connection {
   org_id: string; // FK → organizations.id
   integration_id: string; // FK → integrations.id
 
-  // Authentication details
   access_token?: string; // OAuth2 access token
   refresh_token?: string; // OAuth2 refresh token
   api_key?: string; // For API-key based integrations
 
-  // Connection state
   status: "active" | "expired" | "revoked" | "error";
   last_sync_at?: Date; // Last successful sync timestamp
   created_at: Date; // Creation timestamp
