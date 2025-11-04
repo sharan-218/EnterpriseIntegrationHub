@@ -5,6 +5,7 @@ import cors from "cors";
 // import { createClient } from "@supabase/supabase-js";
 import integrationRoutes from "./api/integrations";
 import connectionRoutes from "./routes/connectionRoutes";
+import dashboardRoutes from "./api/dashboard";
 
 const app = express();
 app.use(cors());
@@ -12,6 +13,7 @@ app.use(express.json());
 
 app.use("/api/integrations", integrationRoutes);
 app.use("/api/connections", connectionRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 const PORT = process.env.PORT || 8000;
 // const SUPABASE_URL = process.env.SUPABASE_URL!;
 // const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
